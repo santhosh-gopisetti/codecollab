@@ -15,12 +15,12 @@ const CodeEditor = ({ roomId, username }) => {
   };
 
  useEffect(() => {
-  const socket = io(process.env.REACT_APP_BACKEND_URL); // safer way
-
+  const socket = io(process.env.REACT_APP_BACKEND_URL);
   socketRef.current = socket;
 
   socket.on('connect', () => {
     socket.emit('join_room', roomId);
+    socket.emit('set_username', username); // save on server
     socket.emit('join_user', { roomId, username });
   });
 
@@ -30,18 +30,19 @@ const CodeEditor = ({ roomId, username }) => {
     }
   });
 
-  socket.on('user_left', (name) => {
-    setMessages(prev => [...prev, `${name} left the room.`]);
-  });
-
   socket.on('user_joined', (name) => {
     setMessages(prev => [...prev, `${name} joined the room.`]);
+  });
+
+  socket.on('user_left', (name) => {
+    setMessages(prev => [...prev, `${name} left the room.`]);
   });
 
   return () => {
     socket.disconnect();
   };
-}, [roomId, code, username]); // ✅ FIXED
+}, [roomId, username, code]);
+
 
 
   return (

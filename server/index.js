@@ -6,18 +6,21 @@ const cors = require('cors');
 const app = express();
 const server = http.createServer(app);
 
+// Allow CORS for frontend (Netlify or others)
+app.use(cors());
+
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: '*', // In production, set to your Netlify frontend URL
     methods: ['GET', 'POST'],
   },
 });
 
-// Store socket.id → username mapping
+// Map socket.id → { username, roomId }
 const userMap = {};
 
 io.on('connection', (socket) => {
-  console.log('✅ User connected:', socket.id);
+  console.log(`✅ User connected: ${socket.id}`);
 
   socket.on('join_room', (roomId) => {
     socket.join(roomId);
@@ -27,6 +30,7 @@ io.on('connection', (socket) => {
   socket.on('join_user', ({ roomId, username }) => {
     userMap[socket.id] = { username, roomId };
     socket.to(roomId).emit('user_joined', username);
+    console.log(`👤 ${username} joined room: ${roomId}`);
   });
 
   socket.on('send_code', ({ roomId, code }) => {
@@ -38,12 +42,15 @@ io.on('connection', (socket) => {
     if (user) {
       const { username, roomId } = user;
       socket.to(roomId).emit('user_left', username);
+      console.log(`🚪 ${username} left room: ${roomId}`);
       delete userMap[socket.id];
+    } else {
+      console.log(`❌ Disconnected: ${socket.id}`);
     }
-    console.log('❌ User disconnected:', socket.id);
   });
 });
 
-server.listen(4000, () => {
-  console.log('🚀 Server running at http://localhost:4000');
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
