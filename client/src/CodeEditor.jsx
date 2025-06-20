@@ -7,20 +7,20 @@ const CodeEditor = ({ roomId, username }) => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef(null);
 
-  const handleChange = (value) => {
-    setCode(value);
-    if (socketRef.current) {
-      socketRef.current.emit('send_code', { roomId, code: value });
-    }
-  };
+ const handleChange = (value) => {
+  setCode(value);
+  if (socketRef.current && socketRef.current.connected) {
+    socketRef.current.emit('send_code', { roomId, code: value });
+  }
+};
 
- useEffect(() => {
+
+useEffect(() => {
   const socket = io(process.env.REACT_APP_BACKEND_URL);
   socketRef.current = socket;
 
   socket.on('connect', () => {
     socket.emit('join_room', roomId);
-    socket.emit('set_username', username); // save on server
     socket.emit('join_user', { roomId, username });
   });
 
@@ -39,9 +39,10 @@ const CodeEditor = ({ roomId, username }) => {
   });
 
   return () => {
-    socket.disconnect();
+    socket.disconnect(); // disconnect once
   };
-}, [roomId, username, code]);
+}, [roomId]); // ✅ only on roomId change
+
 
 
 
