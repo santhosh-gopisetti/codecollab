@@ -15,6 +15,7 @@ const CodeEditor = ({ roomId, username }) => {
 };
 
 
+
 useEffect(() => {
   const socket = io(process.env.REACT_APP_BACKEND_URL);
   socketRef.current = socket;
@@ -39,9 +40,10 @@ useEffect(() => {
   });
 
   return () => {
-    socket.disconnect(); // disconnect once
+    socket.disconnect(); // cleanup on unmount
   };
-}, [roomId,code,username]); // ✅ only on roomId change
+}, [roomId]); // only depend on roomId!
+
 
 
 
