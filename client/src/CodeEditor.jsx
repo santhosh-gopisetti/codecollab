@@ -14,32 +14,34 @@ const CodeEditor = ({ roomId, username }) => {
     }
   };
 
-  useEffect(() => {
-    const socket = io('http://localhost:4000');
-    socketRef.current = socket;
+ useEffect(() => {
+  const socket = io('http://localhost:4000');
+  socketRef.current = socket;
 
-    socket.on('connect', () => {
-      socket.emit('join_room', roomId);
-      socket.emit('join_user', { roomId, username });
-    });
+  socket.on('connect', () => {
+    socket.emit('join_room', roomId);
+    socket.emit('join_user', { roomId, username });
+  });
 
-    socket.on('receive_code', (data) => {
-      if (data !== code) {
-        setCode(data);
-      }
-    });
-    socket.on('user_left', (name) => {
-  setMessages(prev => [...prev, `${name} left the room.`]);
-});
+  socket.on('receive_code', (data) => {
+    if (data !== code) {
+      setCode(data);
+    }
+  });
 
-    socket.on('user_joined', (name) => {
-      setMessages(prev => [...prev, `${name} joined the room.`]);
-    });
+  socket.on('user_left', (name) => {
+    setMessages(prev => [...prev, `${name} left the room.`]);
+  });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [roomId]);
+  socket.on('user_joined', (name) => {
+    setMessages(prev => [...prev, `${name} joined the room.`]);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, [roomId, code, username]); // ✅ FIXED
+
 
   return (
     <div style={{ display: 'flex', flex: 1 }}>
