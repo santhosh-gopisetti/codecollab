@@ -15,7 +15,8 @@ const CodeEditor = ({ roomId, username }) => {
   };
 
  useEffect(() => {
-  const socket = io('http://localhost:4000');
+  const socket = io(process.env.REACT_APP_BACKEND_URL); // safer way
+
   socketRef.current = socket;
 
   socket.on('connect', () => {
