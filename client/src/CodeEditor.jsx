@@ -41,7 +41,7 @@ useEffect(() => {
   return () => {
     socket.disconnect(); // disconnect once
   };
-}, [roomId]); // ✅ only on roomId change
+}, [roomId,code,username]); // ✅ only on roomId change
 
 
 
