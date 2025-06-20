@@ -67,7 +67,7 @@ const CodeEditor = ({ roomId, username }) => {
         {messages.length === 0 ? (
           <p style={{ color: '#6b7280' }}>No activity yet</p>
         ) : (
-          messages.map((msg, i) => <p key={i}>🔔 {msg}</p>)
+          messages.map((msg, i) => <p key={i}> {msg}</p>)
         )}
       </div>
     </div>

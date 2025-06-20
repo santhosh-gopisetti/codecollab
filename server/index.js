@@ -20,17 +20,17 @@ const io = new Server(server, {
 const userMap = {};
 
 io.on('connection', (socket) => {
-  console.log(`✅ User connected: ${socket.id}`);
+  console.log(` User connected: ${socket.id}`);
 
   socket.on('join_room', (roomId) => {
     socket.join(roomId);
-    console.log(`🔗 User ${socket.id} joined room: ${roomId}`);
+    console.log(` User ${socket.id} joined room: ${roomId}`);
   });
 
   socket.on('join_user', ({ roomId, username }) => {
     userMap[socket.id] = { username, roomId };
     socket.to(roomId).emit('user_joined', username);
-    console.log(`👤 ${username} joined room: ${roomId}`);
+    console.log(` ${username} joined room: ${roomId}`);
   });
 
   socket.on('send_code', ({ roomId, code }) => {
@@ -42,15 +42,15 @@ io.on('connection', (socket) => {
     if (user) {
       const { username, roomId } = user;
       socket.to(roomId).emit('user_left', username);
-      console.log(`🚪 ${username} left room: ${roomId}`);
+      console.log(` ${username} left room: ${roomId}`);
       delete userMap[socket.id];
     } else {
-      console.log(`❌ Disconnected: ${socket.id}`);
+      console.log(` Disconnected: ${socket.id}`);
     }
   });
 });
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(` Server running at http://localhost:${PORT}`);
 });
