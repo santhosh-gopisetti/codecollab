@@ -4,11 +4,11 @@
 
 ##  Live Demo
 
-👉 [Click here to try CodeCollab](https://68554603ed2d0ec0fd858926--wonderful-kleicha-1d6176.netlify.app/)
+ [Click here to try CodeCollab](https://68554603ed2d0ec0fd858926--wonderful-kleicha-1d6176.netlify.app/)
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Frontend
 - React.js 
