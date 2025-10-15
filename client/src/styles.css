@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* === GLOBAL STYLES === */
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira+Sans,Droid+Sans,Helvetica+Neue,sans-serif');
 
@@ -154,3 +155,87 @@ body {
 .messages-container::-webkit-scrollbar-thumb:hover {
   background-color: #a8a8a8;
 }
+=======
+/* Light theme for CodeCollab */
+
+body {
+  background-color: #f4f4f5;
+  color: #111827;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #111827;
+}
+
+.button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #d1d5db;
+  background-color: #ffffff;
+}
+
+.room-id {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.copy-btn {
+  background-color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: #111827;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #d1d5db;
+}
+.app-header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-bottom: 1px solid #d1d5db;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #2563eb;
+  font-weight: 600;
+}
+>>>>>>> c888356068aa0c9eef9b7afc7a7548278292c2c4
