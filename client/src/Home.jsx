@@ -22,7 +22,6 @@ const Home = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="home-page-background">
       <div className="form-container">
         <h2>CodeCollab</h2>
@@ -41,33 +40,8 @@ const Home = () => {
         <button className="btn" onClick={handleJoin}>Join Room</button>
         <button className="btn" onClick={generateRoomId}>Generate Room ID</button>
       </div>
-=======
-    <div className="container">
-      <h2>Enter Room ID and Username</h2>
-      <input
-        className="input"
-        placeholder="Room ID"
-        value={roomId}
-        onChange={(e) => setRoomId(e.target.value)}
-      />
-      <br />
-      <input
-        className="input"
-        placeholder="Your Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <button className="button" onClick={handleJoin}>Join Room</button>
-      <br />
-      <button className="button" onClick={generateRoomId}>Generate Room ID</button>
->>>>>>> c888356068aa0c9eef9b7afc7a7548278292c2c4
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default Home;
-=======
-export default Home;
->>>>>>> c888356068aa0c9eef9b7afc7a7548278292c2c4
